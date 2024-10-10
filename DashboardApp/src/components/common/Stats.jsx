@@ -13,7 +13,7 @@ function Stats({ name, icon: Icon, value, color }) {
           {name}
         </span>
 
-        <p clñssName="mt-1 text-3xl font-semibold text-gray-100">{value}</p>
+        <p className="mt-1 text-3xl font-semibold text-gray-100">{value}</p>
       </div>
     </motion.div>
   );

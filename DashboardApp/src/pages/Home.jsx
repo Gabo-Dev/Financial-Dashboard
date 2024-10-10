@@ -3,6 +3,7 @@ import Header from '../components/common/Header'
 import Stats from '../components/common/Stats'
 import { motion } from 'framer-motion'
 import { BarChart2, Users, Zap, ShoppingBag } from 'lucide-react'
+import CurrenciesOverviewChart from '../components/overview/CurrenciesOverviewChart'
 
 function Home() {
   return (
@@ -20,6 +21,11 @@ function Home() {
           <Stats name="Total Products" icon={ShoppingBag} value="537" color="#EC4899" />
           <Stats name="Conversion Rate" icon={BarChart2} value="10%" color="#10B981" />
         </motion.div>
+
+        <div className='grid grid-cols-1 lg-grid-cols-2 gap-8'>
+          <CurrenciesOverviewChart /> 
+          
+        </div>
       </main>
     </div>
   )
