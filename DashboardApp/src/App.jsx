@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import ProductsPage from "./pages/ProductsPage";
+import SavingsPage from "./pages/SavingsPage";
 import UsersPage from "./pages/UsersPage";
 import SalesPage from "./pages/SalesPage";
 import OrdersPage from "./pages/OrdersPage";
@@ -8,6 +8,15 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
 
 import Sidebar from "./components/Sidebar";
+const routes = [
+  { path: "/", element: <Home /> },
+  { path: "/savings", element: <SavingsPage /> },
+  { path: "/users", element: <UsersPage /> },
+  { path: "/sales", element: <SalesPage /> },
+  { path: "/orders", element: <OrdersPage /> },
+  { path: "/analytics", element: <AnalyticsPage /> },
+  { path: "/settings", element: <SettingsPage /> },
+];
 function App() {
   return (
     <div className="flex h-screen bg-gray-900 text-gray-100 overflow-hidden">
@@ -21,13 +30,9 @@ function App() {
 
       <Sidebar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/Users" element={<UsersPage />} />
-        <Route path="/Sales" element={<SalesPage />} />
-        <Route path="/Orders" element={<OrdersPage />} />
-        <Route path="/Analytics" element={<AnalyticsPage />} />
-        <Route path="/Settings" element={<SettingsPage />} />
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
       </Routes>
     </div>
   );

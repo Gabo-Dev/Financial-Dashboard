@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+// RTK Query
 export const apiCore = createApi({
     reducerPath: 'apiCore',
     baseQuery: fetchBaseQuery({
@@ -16,6 +17,8 @@ export const apiCore = createApi({
     endpoints: (builder) => ({
         getCurrencies: builder.query({
             query: () => 'markets/stock/history?symbol=EURUSD%3DX&interval=3mo',
+            // keep data for a maximum of 3 minutes 
+            keepUnusedDataFor: 180,
         }),
     }),
 });
