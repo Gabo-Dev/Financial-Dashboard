@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import SavingsPage from "./pages/SavingsPage";
 import UsersPage from "./pages/UsersPage";
@@ -6,10 +6,13 @@ import SalesPage from "./pages/SalesPage";
 import OrdersPage from "./pages/OrdersPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
+import LandingPage from "./pages/LandingPage";
 
 import Sidebar from "./components/Sidebar";
+import { useState } from "react";
+
 const routes = [
-  { path: "/", element: <Home /> },
+  { path: "/home", element: <Home /> },
   { path: "/savings", element: <SavingsPage /> },
   { path: "/users", element: <UsersPage /> },
   { path: "/sales", element: <SalesPage /> },
@@ -17,24 +20,37 @@ const routes = [
   { path: "/analytics", element: <AnalyticsPage /> },
   { path: "/settings", element: <SettingsPage /> },
 ];
-function App() {
-  return (
-    <div className="flex h-screen bg-gray-900 text-gray-100 overflow-hidden">
-      <div className="fixed inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-gray-900
-           via-gray-800 to-gray-900 opacity-80"
-        />
-        <div className="absolute inset-0 backdrop-blur-sm" />
-      </div>
 
-      <Sidebar />
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
+
+  const handleLogin = () => {
+    setIsAuthenticated(true); // Simula el inicio de sesión
+  };
+
+  return (
+    <>
       <Routes>
+        {/* Ruta para la landing page */}
+        <Route path="/" element={<LandingPage onLogin={handleLogin} />} />
+
+        {/* Rutas que requieren autenticación */}
         {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.element} />
+          <Route 
+            key={index} 
+            path={route.path} 
+            element={isAuthenticated ? (
+              <>
+                <Sidebar />  {/* Sidebar solo se renderiza si el usuario está autenticado */}
+                {route.element}
+              </>
+            ) : (
+              <Navigate to="/" /> // Redirige a la landing page si no está autenticado
+            )} 
+          />
         ))}
       </Routes>
-    </div>
+    </>
   );
 }
 
