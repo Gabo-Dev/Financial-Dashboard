@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { BarChart2, Users, Zap, ShoppingBag } from 'lucide-react'
 import CurrenciesOverviewChart from '../components/overview/CurrenciesOverviewChart'
 
+
 function Home() {
   return (
     <div className='flex-1 overflow-auto relative z-10'>
