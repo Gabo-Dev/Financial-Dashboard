@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
-  { name: "Home", icon: BarChart2, color: "#6366f1", href: "/" },
+  { name: "Home", icon: BarChart2, color: "#6366f1", href: "/home" },
   { name: "Savings Managment", icon: DollarSign, color: "#8B5CF6", href: "/savings" },
   { name: "Users", icon: Users, color: "#EC4899", href: "/users" },
   { name: "Sales", icon: DollarSign, color: "10B981", href: "/sales" },

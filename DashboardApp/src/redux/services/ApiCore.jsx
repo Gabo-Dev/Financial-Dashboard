@@ -4,7 +4,8 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const apiCore = createApi({
     reducerPath: 'apiCore',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://yahoo-finance15.p.rapidapi.com/api/v1',
+        baseUrl: 'https://yahoo-finance15.p.rapidapi.com/api/',
+        
         prepareHeaders: (headers) => {
             headers.set(
                 'X-RapidAPI-Key',
@@ -16,11 +17,16 @@ export const apiCore = createApi({
     }),
     endpoints: (builder) => ({
         getCurrencies: builder.query({
-            query: () => 'markets/stock/history?symbol=EURUSD%3DX&interval=3mo',
+            query: () => 'v1/markets/stock/history?symbol=EURUSD%3DX&interval=3mo',
             // keep data for a maximum of 3 minutes 
             keepUnusedDataFor: 180,
         }),
+        getNews: builder.query({
+            query: () => 'v2/markets/news',
+            keepUnusedDataFor: 180,
+        })
     }),
+
 });
 
-export const {useGetCurrenciesQuery} = apiCore;
+export const {useGetCurrenciesQuery, useGetNewsQuery} = apiCore;

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import SavingsPage from "./pages/SavingsPage";
 import UsersPage from "./pages/UsersPage";
@@ -19,31 +19,34 @@ function App() {
     { path: "/analytics", element: <AnalyticsPage /> },
     { path: "/settings", element: <SettingsPage /> },
   ];
-  // Get the current location
+  // Verificar si estamos en la página de inicio
   const location = useLocation();
-  //  Verify if the location contains the landing page
   const isLandingPage = location.pathname === "/";
 
-
-
   return (
-    <>
-      {/* Show Sidebar only if it's not the landing page */}
-      {!isLandingPage && <Sidebar />}
-      <Routes>
-        {/* Ruta para la landing page */}
-        <Route path="/" element={<LandingPage />} />
+    <div className="flex h-full bg-gray-900 text-gray-100 overflow-hidden">
+      {/* Background overlay */}
+      <div className="fixed inset-0 z-0">
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-gray-900
+           via-gray-800 to-gray-900 opacity-80"
+        />
+        <div className="absolute inset-0 backdrop-blur-sm" />
+      </div>
 
-        {/* Rutas que requieren autenticación */}
-        {routes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={route.element}
-          />
-        ))}
-      </Routes>
-    </>
+      {/* Render the sidebar if we're not on the landing page */}
+      {!isLandingPage && <Sidebar />}
+
+      {/* Main container */}
+      <div className="flex-1  relative max-h-screen overflow-y-auto ">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </div>
+    </div>
   );
 }
 
